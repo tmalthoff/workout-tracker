@@ -11,6 +11,15 @@ router.get('/', async function(req, res) {
     }
 })
 
+router.get('/range', async function(req, res) {
+    try {
+        const workouts = await Workout.find({}).limit(7)
+        res.json(workouts)
+    } catch (ex) {
+        res.status(500).json({ error: ex.message })
+    }
+})
+
 router.post('/', async function(req, res) {
     console.log(req.body)
 })
