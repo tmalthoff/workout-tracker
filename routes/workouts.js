@@ -35,7 +35,7 @@ router.put('/:id', async function(req, res) {
             await workout.updateOne({ 
                 $push: { exercises: req.body } 
             })
-            res.sendStatus(200)
+            res.json(workout)
         } else {
             res.status(404).json({ error: 'Workout not found' })
         }
