@@ -11,4 +11,24 @@ router.get('/', async function(req, res) {
     }
 })
 
+router.post('/', async function(req, res) {
+    console.log(req.body)
+})
+
+router.put('/:id', async function(req, res) {
+    try {
+        const workout = Workout.findById(req.params.id)
+        if (workout) {
+            await workout.updateOne({ 
+                $push: { exercises: req.body } 
+            })
+            res.sendStatus(200)
+        } else {
+            res.status(404).json({ error: 'Workout not found' })
+        }
+    } catch (ex) {
+        res.status(500).json({ error: ex.message })
+    }
+})
+
 module.exports = router
