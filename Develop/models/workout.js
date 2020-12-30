@@ -15,7 +15,7 @@ let workoutSchema = new mongoose.Schema({
             trim: true,
             required: "Enter an exercise name"
         },
-            duration: {
+        duration: {
             type: Number,
             required: "Enter an exercise duration in minutes"
         },
