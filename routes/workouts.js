@@ -30,11 +30,11 @@ router.post('/', async function(req, res) {
 
 router.put('/:id', async function(req, res) {
     try {
-        const workout = Workout.findById(req.params.id)
+        const workout = await Workout.findByIdAndUpdate(req.params.id, {
+            $push: { exercises: req.body } 
+        }, { new: true, runValidators: true })
+
         if (workout) {
-            await workout.updateOne({ 
-                $push: { exercises: req.body } 
-            })
             res.json(workout)
         } else {
             res.status(404).json({ error: 'Workout not found' })
