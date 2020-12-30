@@ -1,5 +1,4 @@
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router()
 const { Workout } = require('../models')
 
 router.get('/', async function(req, res) {
@@ -21,7 +20,12 @@ router.get('/range', async function(req, res) {
 })
 
 router.post('/', async function(req, res) {
-    console.log(req.body)
+    try {
+        const workout = await Workout.create({})
+        res.status(201).json(workout)
+    } catch (ex) {
+        res.status(500).json({ error: ex.message })
+    }
 })
 
 router.put('/:id', async function(req, res) {
