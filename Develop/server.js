@@ -18,7 +18,7 @@ app.use(morgan('dev'))
 
 app.use('/api', require('./routes'))
 
-app.use(express.static("public"))
+app.use(express.static("public", { extensions: ['html']}))
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
